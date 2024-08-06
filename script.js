@@ -25,7 +25,6 @@ function addBookToLibrary() {
 function displayBook() {
     let bookCard;
     let bookTitle;
-
     myLibrary.forEach((book) => {
         if (bookCard) {
             section.removeChild(bookCard)
@@ -49,9 +48,14 @@ newBookButton.addEventListener("click", () => {
 })
 
 section.addEventListener("click", (e) => {
-
     if (e.target.classList.contains("removeBtn")) {
         e.target.parentNode.remove()
-        bookCard = null
     }
+
+    const bookTitle = e.target.previousElementSibling
+    myLibrary.forEach((book, index) => {
+        if (book.title === bookTitle.textContent) {
+            myLibrary.splice(index, 1);
+        }
+    })
 })
