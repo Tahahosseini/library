@@ -20,31 +20,31 @@ function addBookToLibrary() {
     if (!title || !author || !pages || !status) return
     let newBook = new Book(title, author, pages, statusBoolean)
     myLibrary.push(newBook)
-}
 
-function displayBook() {
-    let bookCard;
-    let bookTitle;
-    myLibrary.forEach((book) => {
-        if (bookCard) {
-            section.removeChild(bookCard)
-        }
-        bookCard = document.createElement("div")
-        bookTitle = document.createElement("h2")
-        removeButton = document.createElement("button")
-        bookCard.classList.toggle("card")
-        removeButton.classList.toggle("removeBtn")
-        removeButton.textContent = "Remove Book"
-        bookTitle.textContent = book.title
-        section.appendChild(bookCard)
-        bookCard.appendChild(bookTitle)
-        bookCard.appendChild(removeButton)
-    })
+    function displayBook() {
+        let bookCard;
+        let bookTitle;
+        myLibrary.forEach((book) => {
+            if (bookCard) {
+                section.removeChild(bookCard)
+            }
+            bookCard = document.createElement("div")
+            bookTitle = document.createElement("h2")
+            removeButton = document.createElement("button")
+            bookCard.classList.toggle("card")
+            removeButton.classList.toggle("removeBtn")
+            removeButton.textContent = "Remove Book"
+            bookTitle.textContent = book.title
+            section.appendChild(bookCard)
+            bookCard.appendChild(bookTitle)
+            bookCard.appendChild(removeButton)
+        })
+    }
+    displayBook()
 }
 
 newBookButton.addEventListener("click", () => {
     addBookToLibrary()
-    displayBook()
 })
 
 section.addEventListener("click", (e) => {
