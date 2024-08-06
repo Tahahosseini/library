@@ -1,7 +1,7 @@
 const section = document.querySelector("section")
-const button = document.querySelector(".btn")
+const newBookButton = document.querySelector(".btn")
 const myLibrary = [];
-
+let removeButton;
 
 function Book(title, author, pages, isRead) {
     this.title = title;
@@ -20,10 +20,12 @@ function addBookToLibrary() {
     if (!title || !author || !pages || !status) return
     let newBook = new Book(title, author, pages, statusBoolean)
     myLibrary.push(newBook)
+}
 
+function displayBook() {
     let bookCard;
     let bookTitle;
-    let removeButton
+
     myLibrary.forEach((book) => {
         if (bookCard) {
             section.removeChild(bookCard)
@@ -41,6 +43,15 @@ function addBookToLibrary() {
     })
 }
 
-button.addEventListener("click", () => {
+newBookButton.addEventListener("click", () => {
     addBookToLibrary()
+    displayBook()
+})
+
+section.addEventListener("click", (e) => {
+
+    if (e.target.classList.contains("removeBtn")) {
+        e.target.parentNode.remove()
+        bookCard = null
+    }
 })
