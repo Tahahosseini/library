@@ -1,4 +1,5 @@
 const section = document.querySelector("section")
+const button = document.querySelector(".btn")
 const myLibrary = [];
 
 
@@ -20,9 +21,14 @@ function addBookToLibrary() {
     let newBook = new Book(title, author, pages, statusBoolean)
     myLibrary.push(newBook)
 
+    let bookCard;
+    let bookTitle;
     myLibrary.forEach((book) => {
-        const bookCard = document.createElement("div")
-        const bookTitle = document.createElement("h2")
+        if (bookCard && bookTitle) {
+            section.removeChild(bookCard)
+        }
+        bookCard = document.createElement("div")
+        bookTitle = document.createElement("h2")
         bookCard.classList.toggle("card")
         bookTitle.textContent = book.title
         section.appendChild(bookCard)
@@ -30,4 +36,6 @@ function addBookToLibrary() {
     })
 }
 
-// addBookToLibrary()
+button.addEventListener("click", () => {
+    addBookToLibrary()
+})
