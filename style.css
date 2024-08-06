@@ -24,7 +24,7 @@ main>h1 {
 
 section {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
 }
 
@@ -33,23 +33,54 @@ section {
     height: 300px;
     border-radius: 8px;
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    padding: 25% 0 25px;
 }
 
 .card h2 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    margin-bottom: auto;
 }
 
-.button-74 {
+.removeBtn {
+    background-color: #fff;
+    border: 0 solid #e2e8f0;
+    border-radius: 1.5rem;
+    box-sizing: border-box;
+    color: #0d172a;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 1rem 1.6rem;
+    text-align: center;
+    text-decoration: none #0d172a solid;
+    text-decoration-thickness: auto;
+    transition: all .1s cubic-bezier(.4, 0, .2, 1);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.removeBtn:hover {
+    background-color: #1e293b;
+    color: #fff;
+}
+
+.button {
     position: fixed;
     bottom: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.button-74 {
+.button {
     background-color: #fff;
     border: 0 solid #e2e8f0;
     border-radius: 1.5rem;
@@ -71,13 +102,13 @@ section {
     touch-action: manipulation;
 }
 
-.button-74:hover {
+.button:hover {
     background-color: #1e293b;
     color: #fff;
 }
 
 @media (min-width: 768px) {
-    .button-81 {
+    .button {
         font-size: 1.125rem;
         padding: 1rem 2rem;
     }

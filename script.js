@@ -23,16 +23,21 @@ function addBookToLibrary() {
 
     let bookCard;
     let bookTitle;
+    let removeButton
     myLibrary.forEach((book) => {
-        if (bookCard && bookTitle) {
+        if (bookCard) {
             section.removeChild(bookCard)
         }
         bookCard = document.createElement("div")
         bookTitle = document.createElement("h2")
+        removeButton = document.createElement("button")
         bookCard.classList.toggle("card")
+        removeButton.classList.toggle("removeBtn")
+        removeButton.textContent = "Remove Book"
         bookTitle.textContent = book.title
         section.appendChild(bookCard)
         bookCard.appendChild(bookTitle)
+        bookCard.appendChild(removeButton)
     })
 }
 
