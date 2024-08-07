@@ -1,4 +1,4 @@
-const section = document.querySelector("section")
+const booksGrid = document.querySelector(".booksGrid")
 const newBookButton = document.querySelector(".newBookButton")
 const myLibrary = [];
 
@@ -10,91 +10,61 @@ function Book(title, author, pages, isRead) {
 }
 
 function addBookToLibrary() {
-    let title = prompt("title?")
-    let author = prompt("author?")
-    let pages = prompt("How many pages?")
-    let status = prompt("Have you read it? y/n")
-    let statusBoolean = (status === "y") ? true : false
-    if (title === "" || author === "" || pages === "" || status === "") return
+    const title = prompt("title?")
+    const author = prompt("author?")
+    const pages = prompt("How many pages?")
+    const status = prompt("Have you read it? y/n")
+    const statusBoolean = (status === "y") ? true : false
     if (!title || !author || !pages || !status) return
-    let newBook = new Book(title, author, pages, statusBoolean)
+    const newBook = new Book(title, author, pages, statusBoolean)
     myLibrary.push(newBook)
-
-    function createBookCard() {
-        let bookCard;
-        myLibrary.forEach((book) => {
-            if (bookCard) {
-                section.removeChild(bookCard)
-            }
-            bookCard = document.createElement("div")
-            const bookTitle = document.createElement("h2")
-            const removeButton = document.createElement("button")
-            bookCard.classList.toggle("card")
-            removeButton.classList.toggle("removeButton")
-            removeButton.setAttribute("role", "button")
-            removeButton.textContent = "Remove Book"
-            bookTitle.textContent = book.title
-            section.appendChild(bookCard)
-            bookCard.appendChild(bookTitle)
-            if (statusBoolean) {
-                const readButton = document.createElement("button")
-                readButton.setAttribute("id", "readButton")
-                readButton.setAttribute("class", "readButton")
-                readButton.setAttribute("role", "button")
-                readButton.textContent = "Read"
-                bookCard.appendChild(readButton)
-            }
-            else {
-                const notReadButton = document.createElement("button")
-                notReadButton.setAttribute("id", "notReadButton")
-                notReadButton.setAttribute("class", "notReadButton")
-                notReadButton.setAttribute("role", "button")
-                notReadButton.textContent = "Not Read"
-                bookCard.appendChild(notReadButton)
-            }
-            bookCard.appendChild(removeButton)
-        })
-    }
-    createBookCard()
+    updateCards()
 }
 
-newBookButton.addEventListener("click", () => {
-    addBookToLibrary()
-})
-
-section.addEventListener("click", (e) => {
-    if (e.target.classList.contains("removeButton")) {
-        const bookTitle = e.target.previousElementSibling.previousElementSibling
-        myLibrary.forEach((book, index) => {
-            if (book.title === bookTitle.textContent) {
-                myLibrary.splice(index, 1);
-            }
-        })
-        e.target.parentNode.remove()
-    }
-
-    if (e.target.classList.contains("readButton")) {
-        e.target.textContent = "Not Read"
-        e.target.setAttribute("id", "notReadButton")
-        e.target.setAttribute("class", "notReadButton")
-
-        const bookTitle = e.target.previousElementSibling
-        myLibrary.forEach((book) => {
-            if (book.title === bookTitle.textContent) {
-                book.isRead = false
-            }
+let bookCard;
+let allBookCards;
+function updateCards() {
+    if (bookCard) {
+        allBookCards.forEach((card) => {
+            booksGrid.removeChild(card)
         })
     }
-    else if (e.target.classList.contains("notReadButton")) {
-        e.target.textContent = "Read"
-        e.target.setAttribute("id", "readButton")
-        e.target.setAttribute("class", "readButton")
 
-        const bookTitle = e.target.previousElementSibling
-        myLibrary.forEach((book) => {
-            if (book.title === bookTitle.textContent) {
-                book.isRead = true
-            }
+    myLibrary.forEach((book, index) => {
+        bookCard = document.createElement("div")
+        bookCard.className = "card"
+        booksGrid.appendChild(bookCard)
+
+        allBookCards = document.querySelectorAll(".card")
+
+        const bookTitle = document.createElement("h2")
+        bookTitle.textContent = book.title
+        bookCard.appendChild(bookTitle)
+
+        const statusButton = document.createElement("button")
+        statusButton.setAttribute("role", "button")
+        statusButton.textContent = (book.isRead) ? "Read" : "Not Read"
+        statusButton.className = (book.isRead) ? "readButton" : "notReadButton"
+        statusButton.id = (book.isRead) ? "readButton" : "notReadButton"
+        bookCard.appendChild(statusButton)
+        statusButton.addEventListener("click", () => toggleStatusButton(index))
+
+        const removeButton = document.createElement("button")
+        removeButton.className = "removeButton"
+        removeButton.setAttribute("role", "button")
+        removeButton.textContent = "Remove Book"
+        bookCard.appendChild(removeButton)
+        removeButton.addEventListener("click", (e) => {
+            myLibrary.splice(index, 1);
+            e.target.parentNode.remove()
+            allBookCards = document.querySelectorAll(".card")
         })
-    }
-})
+    })
+}
+
+function toggleStatusButton(index) {
+    myLibrary[index].isRead = !myLibrary[index].isRead;
+    updateCards()
+}
+
+newBookButton.addEventListener("click", addBookToLibrary)
