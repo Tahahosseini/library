@@ -20,7 +20,7 @@ function addBookToLibrary() {
     let newBook = new Book(title, author, pages, statusBoolean)
     myLibrary.push(newBook)
 
-    function displayBook() {
+    function createBookCard() {
         let bookCard;
         myLibrary.forEach((book) => {
             if (bookCard) {
@@ -55,7 +55,7 @@ function addBookToLibrary() {
             bookCard.appendChild(removeButton)
         })
     }
-    displayBook()
+    createBookCard()
 }
 
 newBookButton.addEventListener("click", () => {
@@ -77,10 +77,27 @@ section.addEventListener("click", (e) => {
         e.target.textContent = "Not Read"
         e.target.setAttribute("id", "notReadButton")
         e.target.setAttribute("class", "notReadButton")
+
+        const bookTitle = e.target.previousElementSibling
+        myLibrary.forEach((book) => {
+            if (book.title === bookTitle.textContent) {
+                book.isRead = false
+            }
+        })
     }
     else if (e.target.classList.contains("notReadButton")) {
         e.target.textContent = "Read"
         e.target.setAttribute("id", "readButton")
         e.target.setAttribute("class", "readButton")
+
+        const bookTitle = e.target.previousElementSibling
+        myLibrary.forEach((book) => {
+            if (book.title === bookTitle.textContent) {
+                book.isRead = true
+            }
+        })
     }
 })
+
+// when read status is clicked
+// the status in the object is changed
