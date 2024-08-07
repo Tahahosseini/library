@@ -98,6 +98,3 @@ section.addEventListener("click", (e) => {
         })
     }
 })
-
-// when read status is clicked
-// the status in the object is changed
