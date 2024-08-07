@@ -28,19 +28,30 @@ function addBookToLibrary() {
             }
             bookCard = document.createElement("div")
             const bookTitle = document.createElement("h2")
-            const notReadButton = document.createElement("button")
             const removeButton = document.createElement("button")
             bookCard.classList.toggle("card")
-            notReadButton.setAttribute("id", "notReadButton")
-            notReadButton.setAttribute("role", "button")
-            notReadButton.textContent = "Not Read"
             removeButton.classList.toggle("removeButton")
             removeButton.setAttribute("role", "button")
             removeButton.textContent = "Remove Book"
             bookTitle.textContent = book.title
             section.appendChild(bookCard)
             bookCard.appendChild(bookTitle)
-            bookCard.appendChild(notReadButton)
+            if (statusBoolean) {
+                const readButton = document.createElement("button")
+                readButton.setAttribute("id", "readButton")
+                readButton.setAttribute("class", "readButton")
+                readButton.setAttribute("role", "button")
+                readButton.textContent = "Read"
+                bookCard.appendChild(readButton)
+            }
+            else {
+                const notReadButton = document.createElement("button")
+                notReadButton.setAttribute("id", "notReadButton")
+                notReadButton.setAttribute("class", "notReadButton")
+                notReadButton.setAttribute("role", "button")
+                notReadButton.textContent = "Not Read"
+                bookCard.appendChild(notReadButton)
+            }
             bookCard.appendChild(removeButton)
         })
     }
@@ -60,5 +71,16 @@ section.addEventListener("click", (e) => {
             }
         })
         e.target.parentNode.remove()
+    }
+
+    if (e.target.classList.contains("readButton")) {
+        e.target.textContent = "Not Read"
+        e.target.setAttribute("id", "notReadButton")
+        e.target.setAttribute("class", "notReadButton")
+    }
+    else if (e.target.classList.contains("notReadButton")) {
+        e.target.textContent = "Read"
+        e.target.setAttribute("id", "readButton")
+        e.target.setAttribute("class", "readButton")
     }
 })

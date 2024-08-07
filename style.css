@@ -90,6 +90,17 @@ button[role="button"]:hover {
     color: black;
 }
 
+#readButton {
+    background-color: #9fff9c;
+    color: black;
+    width: 90%;
+}
+
+#readButton:hover {
+    filter: brightness(90%);
+    color: black;
+}
+
 .removeButton {
     width: 90%;
 }
