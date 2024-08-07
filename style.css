@@ -24,7 +24,7 @@ main>h1 {
 
 section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 20px;
 }
 
@@ -34,7 +34,7 @@ section {
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -46,10 +46,10 @@ section {
     margin-bottom: auto;
 }
 
-.removeBtn {
+button[role="button"] {
     background-color: #fff;
     border: 0 solid #e2e8f0;
-    border-radius: 1.5rem;
+    border-radius: 8px;
     box-sizing: border-box;
     color: #0d172a;
     cursor: pointer;
@@ -62,54 +62,43 @@ section {
     text-decoration: none #0d172a solid;
     text-decoration-thickness: auto;
     transition: all .1s cubic-bezier(.4, 0, .2, 1);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
 }
 
-.removeBtn:hover {
-    background-color: #1e293b;
-    color: #fff;
-}
-
-.button {
-    position: fixed;
-    bottom: 10%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.button {
-    background-color: #fff;
-    border: 0 solid #e2e8f0;
-    border-radius: 1.5rem;
-    box-sizing: border-box;
-    color: #0d172a;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1;
-    padding: 1rem 1.6rem;
-    text-align: center;
-    text-decoration: none #0d172a solid;
-    text-decoration-thickness: auto;
-    transition: all .1s cubic-bezier(.4, 0, .2, 1);
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-}
-
-.button:hover {
+button[role="button"]:hover {
     background-color: #1e293b;
     color: #fff;
 }
 
 @media (min-width: 768px) {
-    .button {
+    button[role="button"] {
         font-size: 1.125rem;
         padding: 1rem 2rem;
     }
+}
+
+#notReadButton {
+    background-color: #ff9c9c;
+    color: black;
+    width: 90%;
+}
+
+#notReadButton:hover {
+    filter: brightness(90%);
+    color: black;
+}
+
+.removeButton {
+    width: 90%;
+}
+
+.newBookButton {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+
 }

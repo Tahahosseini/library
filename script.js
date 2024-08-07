@@ -1,7 +1,6 @@
 const section = document.querySelector("section")
-const newBookButton = document.querySelector(".btn")
+const newBookButton = document.querySelector(".newBookButton")
 const myLibrary = [];
-let removeButton;
 
 function Book(title, author, pages, isRead) {
     this.title = title;
@@ -23,20 +22,25 @@ function addBookToLibrary() {
 
     function displayBook() {
         let bookCard;
-        let bookTitle;
         myLibrary.forEach((book) => {
             if (bookCard) {
                 section.removeChild(bookCard)
             }
             bookCard = document.createElement("div")
-            bookTitle = document.createElement("h2")
-            removeButton = document.createElement("button")
+            const bookTitle = document.createElement("h2")
+            const notReadButton = document.createElement("button")
+            const removeButton = document.createElement("button")
             bookCard.classList.toggle("card")
-            removeButton.classList.toggle("removeBtn")
+            notReadButton.setAttribute("id", "notReadButton")
+            notReadButton.setAttribute("role", "button")
+            notReadButton.textContent = "Not Read"
+            removeButton.classList.toggle("removeButton")
+            removeButton.setAttribute("role", "button")
             removeButton.textContent = "Remove Book"
             bookTitle.textContent = book.title
             section.appendChild(bookCard)
             bookCard.appendChild(bookTitle)
+            bookCard.appendChild(notReadButton)
             bookCard.appendChild(removeButton)
         })
     }
@@ -48,14 +52,13 @@ newBookButton.addEventListener("click", () => {
 })
 
 section.addEventListener("click", (e) => {
-    if (e.target.classList.contains("removeBtn")) {
+    if (e.target.classList.contains("removeButton")) {
+        const bookTitle = e.target.previousElementSibling.previousElementSibling
+        myLibrary.forEach((book, index) => {
+            if (book.title === bookTitle.textContent) {
+                myLibrary.splice(index, 1);
+            }
+        })
         e.target.parentNode.remove()
     }
-
-    const bookTitle = e.target.previousElementSibling
-    myLibrary.forEach((book, index) => {
-        if (book.title === bookTitle.textContent) {
-            myLibrary.splice(index, 1);
-        }
-    })
 })
