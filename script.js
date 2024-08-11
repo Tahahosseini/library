@@ -1,5 +1,7 @@
 const booksGrid = document.querySelector(".booksGrid")
 const newBookButton = document.querySelector(".newBookButton")
+const modal = document.querySelector("[data-modal]")
+const submit = document.querySelector(".submit")
 const myLibrary = [];
 
 function Book(title, author, pages, isRead) {
@@ -38,14 +40,18 @@ function updateCards() {
     })
 }
 
+
 function addBookToLibrary() {
-    const title = prompt("title?")
-    const author = prompt("author?")
-    const pages = prompt("How many pages?")
-    const status = prompt("Have you read it? y/n")
-    const statusBoolean = (status === "y") ? true : false
-    if (!title || !author || !pages || !status) return
-    const newBook = new Book(title, author, pages, statusBoolean)
+    // const title = prompt("title?")
+    // const author = prompt("author?")
+    // const pages = prompt("How many pages?")
+    // const status = prompt("Have you read it? y/n")
+    // if (!title || !author || !pages) return
+    const title = document.querySelector("#title").value
+    const author = document.querySelector("#author").value
+    const pages = document.querySelector("#pages").value
+    const isRead = document.querySelector("#checkbox").value
+    const newBook = new Book(title, author, pages, isRead)
     myLibrary.push(newBook)
     updateCards()
 }
@@ -60,4 +66,9 @@ function toggleStatusButton(index) {
     updateCards()
 }
 
-newBookButton.addEventListener("click", addBookToLibrary)
+// newBookButton.addEventListener("click", addBookToLibrary)
+newBookButton.addEventListener("click", () => {
+    modal.showModal()
+})
+
+submit.addEventListener("click", addBookToLibrary)

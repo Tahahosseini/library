@@ -14,6 +14,28 @@
         <h1>Your Library</h1>
         <div class="booksGrid"></div>
         <button class="newBookButton" role="button">NEW BOOK</button>
+
+        <dialog data-modal>
+            <div class="modal">
+                <h4>Add New Book</h4>
+                <form class="form">
+                    <label for="title">Book Title</label>
+                    <input id="title" type="text">
+
+                    <label for="author">Author</label>
+                    <input id="author" type="text">
+
+                    <label for="pages">Number of pages</label>
+                    <input id="pages" type="number">
+                    <div class="checkbox">
+                        <label for="checkbox">Have you read it?</label>
+                        <input id="checkbox" type="checkbox">
+                    </div>
+
+                    <button role="button" class="submit">Add Book</button>
+                </form>
+            </div>
+        </dialog>
     </main>
 
     <script src="script.js"></script>
