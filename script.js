@@ -40,17 +40,16 @@ function updateCards() {
     })
 }
 
-
+let title
+let author
+let pages
+let isRead
 function addBookToLibrary() {
-    // const title = prompt("title?")
-    // const author = prompt("author?")
-    // const pages = prompt("How many pages?")
-    // const status = prompt("Have you read it? y/n")
-    // if (!title || !author || !pages) return
-    const title = document.querySelector("#title").value
-    const author = document.querySelector("#author").value
-    const pages = document.querySelector("#pages").value
-    const isRead = document.querySelector("#checkbox").value
+    title = document.getElementById("title").value
+    author = document.getElementById("author").value
+    pages = document.getElementById("pages").value
+    isRead = document.getElementById("checkbox").checked
+    if (!title || !author || !pages) return
     const newBook = new Book(title, author, pages, isRead)
     myLibrary.push(newBook)
     updateCards()
@@ -66,9 +65,11 @@ function toggleStatusButton(index) {
     updateCards()
 }
 
-// newBookButton.addEventListener("click", addBookToLibrary)
 newBookButton.addEventListener("click", () => {
     modal.showModal()
 })
 
-submit.addEventListener("click", addBookToLibrary)
+submit.addEventListener("click", () => {
+    addBookToLibrary()
+    modal.close()
+})
